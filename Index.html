@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inheritance Game - Shape Clicker</title>
+  <style>
+    .shape {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      margin: 20px;
+      cursor: pointer;
+    }
+    .circle {
+      border-radius: 50%;
+      background: red;
+    }
+    .square {
+      background: blue;
+    }
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 100px solid green;
+      background: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Click a shape!</h2>
+<div id="game"></div>
+
+<script>
+  class Shape {
+    constructor(type) {
+      this.type = type;
+    }
+
+    render() {
+      const div = document.createElement("div");
+      div.classList.add("shape", this.type);
+      div.onclick = () => this.onClick(div);
+      document.getElementById("game").appendChild(div);
+    }
+
+    onClick(div) {
+      alert("You clicked a shape!");
+    }
+  }
+
+  class Circle extends Shape {
+    constructor() {
+      super("circle");
+    }
+
+    onClick(div) {
+      div.style.background = "purple";
+      alert("Circle says: Round and rolling!");
+    }
+  }
+
+  class Square extends Shape {
+    constructor() {
+      super("square");
+    }
+
+    onClick(div) {
+      div.style.background = "orange";
+      alert("Square says: I'm solid and stable!");
+    }
+  }
+
+  class Triangle extends Shape {
+    constructor() {
+      super("triangle");
+    }
+
+    onClick(div) {
+      div.style.borderBottomColor = "yellow";
+      alert("Triangle says: I’m sharp and balanced!");
+    }
+  }
+
+  // Create and render shapes
+  const shapes = [new Circle(), new Square(), new Triangle()];
+  shapes.forEach(shape => shape.render());
+</script>
+
+</body>
+</html>
